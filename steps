@@ -32,3 +32,8 @@ sdkmanager --licenses
 
 # Install platform-tools (includes adb) and required target platforms
 sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+for checking local 
+npm install
+npm install expo
+npx expo prebuild
