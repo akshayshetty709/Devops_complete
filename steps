@@ -9,6 +9,8 @@ mkdir -p ~/android-sdk/cmdline-tools
 # Navigate to the directory and download the tools package
 cd ~/android-sdk/cmdline-tools
 
+wget https://dl.google.com/android/repository/commandlinetools-linux-14742923_latest.zip
+
 
 # Extract the package and clean up the zip file
 unzip commandlinetools-linux-*.zip && rm commandlinetools-linux-*.zip
