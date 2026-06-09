@@ -27,7 +27,7 @@ echo 'export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/pla
 source ~/.bashrc
 
 4. Install Specific SDK Packages
-sudo apt install sdk manager
+sudo apt install google-android-cmdline-tools-9.0-installer   # version 9.0+1695033340
 
 # Accept licenses before downloading packages
 sdkmanager --licenses
