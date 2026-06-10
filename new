@@ -1,0 +1,44 @@
+sudo apt update && sudo apt install -y openjdk-17-jdk
+
+
+2. Download and Set Up Android SDK Tools
+
+# Create a dedicated directory for the SDK
+mkdir -p ~/android-sdk/cmdline-tools
+
+# Navigate to the directory and download the tools package
+cd ~/android-sdk/cmdline-tools
+
+wget https://dl.google.com/android/repository/commandlinetools-linux-14742923_latest.zip
+
+
+# Extract the package and clean up the zip file
+unzip commandlinetools-linux-*.zip && rm commandlinetools-linux-*.zip
+
+# Structure the directory correctly for modern SDK configurations
+mv cmdline-tools latest
+
+
+3. Configure Environment Variables
+
+echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
+echo 'export ANDROID_HOME=$HOME/android-sdk' >> ~/.bashrc
+echo 'export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools' >> ~/.bashrc
+source ~/.bashrc
+
+4. Install Specific SDK Packages
+sudo apt install google-android-cmdline-tools-9.0-installer   # version 9.0+1695033340
+
+# Accept licenses before downloading packages
+sdkmanager --licenses
+
+# Install platform-tools (includes adb) and required target platforms
+sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+after this i cloned 1 repo then cd to repo and i run below steps 
+npm install 
+npx expo install -fix 
+npx expo build 
+cd android/
+./gradlew assembleRelease
+
