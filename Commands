@@ -1,3 +1,4 @@
 ~/android-sdk/cmdline-tools/latest/bin/sdkmanager --install "ndk;27.1.12297006"
 echo "sdk.dir=/home/kiaq-lap-130/android-sdk" > \
 /var/lib/jenkins/workspace/apk-s3/android/local.properties
+sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
