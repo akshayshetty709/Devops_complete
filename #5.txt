@@ -1,0 +1,1029 @@
+Started by user Akshay Kumar Shetty
+Obtained Jenkinsfile from git https://github.com/akshayshetty709/personal-finance-mobile.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/apk-s3
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/apk-s3/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/akshayshetty709/personal-finance-mobile.git # timeout=10
+Fetching upstream changes from https://github.com/akshayshetty709/personal-finance-mobile.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/akshayshetty709/personal-finance-mobile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 75ebfcf7c29841a5523833985df6dafd7352503c (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 75ebfcf7c29841a5523833985df6dafd7352503c # timeout=10
+Commit message: "Add JAVA_HOME environment variable to Jenkinsfile"
+ > git rev-list --no-walk 75ebfcf7c29841a5523833985df6dafd7352503c # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (1. Checkout)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/apk-s3/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/akshayshetty709/personal-finance-mobile.git # timeout=10
+Fetching upstream changes from https://github.com/akshayshetty709/personal-finance-mobile.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/akshayshetty709/personal-finance-mobile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 75ebfcf7c29841a5523833985df6dafd7352503c (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 75ebfcf7c29841a5523833985df6dafd7352503c # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main 75ebfcf7c29841a5523833985df6dafd7352503c # timeout=10
+Commit message: "Add JAVA_HOME environment variable to Jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (2. npm install)
+[Pipeline] sh
++ npm install --legacy-peer-deps
+
+added 5 packages, removed 17 packages, changed 18 packages, and audited 603 packages in 6s
+
+50 packages are looking for funding
+  run `npm fund` for details
+
+11 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (3. prebuild)
+[Pipeline] sh
++ npx expo install --fix
+The following packages should be updated for best compatibility with the installed expo version:
+  expo@56.0.9 - expected version: ~56.0.11
+  expo-constants@56.0.17 - expected version: ~56.0.18
+  expo-font@56.0.5 - expected version: ~56.0.6
+  expo-linking@56.0.13 - expected version: ~56.0.14
+  expo-router@56.2.9 - expected version: ~56.2.10
+Your project may not work correctly until you install the expected versions of the packages.
+› Installing 5 SDK 56.0.0 compatible native modules using npm
+> npm install
+
+added 16 packages, removed 5 packages, changed 15 packages, and audited 614 packages in 22s
+
+50 packages are looking for funding
+  run `npm fund` for details
+
+12 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+› Running npx expo install under the updated expo version
+> expo install --fix
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linking@56.0.13 - expected version: ~56.0.14
+  expo-router@56.2.9 - expected version: ~56.2.10
+Your project may not work correctly until you install the expected versions of the packages.
+› Installing 2 SDK 56.0.0 compatible native modules using npm
+> npm install
+
+added 1 package, changed 3 packages, and audited 615 packages in 10s
+
+50 packages are looking for funding
+  run `npm fund` for details
+
+12 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+[Pipeline] sh
++ npx expo prebuild
+- Creating native directories (./ios and ./android)
+✔ Created native directories | reusing /android, /ios
+- Updating package.json
+✔ Updated package.json | no changes
+- Running prebuild
+» android: userInterfaceStyle: Install expo-system-ui in your project to enable this feature.
+- Running prebuild
+✔ Finished prebuild
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (4. build apk file)
+[Pipeline] sh
++ cd android
++ chmod +x gradlew
++ ./gradlew assembleRelease --stacktrace
+Starting a Gradle Daemon, 1 stopped Daemon could not be reused, use --status for details
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:compileKotlin UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:processResources NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:classes UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:compileKotlin UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:classes UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:jar UP-TO-DATE
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-gradle-plugin:expo-autolinking-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-module-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-module-gradle-plugin:pluginDescriptors
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:compileKotlin UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:compileKotlin UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:pluginDescriptors UP-TO-DATE
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:pluginDescriptors UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:processResources UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:classes UP-TO-DATE
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:processResources UP-TO-DATE
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:classes UP-TO-DATE
+> Task :expo-module-gradle-plugin:processResources
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:jar UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+
+> Task :expo-module-gradle-plugin:compileKotlin
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/expo-module-gradle-plugin/src/main/kotlin/expo/modules/plugin/android/AndroidLibraryExtension.kt:9:24 'var targetSdk: Int?' is deprecated. Will be removed from library DSL in v9.0. Use testOptions.targetSdk or/and lint.targetSdk instead.
+
+> Task :expo-module-gradle-plugin:compileJava NO-SOURCE
+> Task :expo-module-gradle-plugin:classes
+> Task :expo-module-gradle-plugin:jar
+
+> Configure project :
+[32m[ExpoRootProject][0m Using the following versions:
+  - buildTools:  [32m36.0.0[0m
+  - minSdk:      [32m24[0m
+  - compileSdk:  [32m36[0m
+  - targetSdk:   [32m36[0m
+  - ndk:         [32m27.1.12297006[0m
+  - kotlin:      [32m2.1.20[0m
+  - ksp:         [32m2.1.20-2.0.1[0m
+
+> Configure project :app
+ ℹ️  [33mApplying gradle plugin[0m '[32mexpo-max-sdk-override-plugin[0m'
+  [expo-max-sdk-override-plugin] This plugin will find all permissions declared with `android:maxSdkVersion`. If there exists a declaration with the `android:maxSdkVersion` annotation and another one without, the plugin will remove the annotation from the final merged manifest. In order to see a log with the changes run a clean build of the app.
+
+> Configure project :expo
+
+Using expo modules
+  - [32mexpo-log-box[0m (56.0.13)
+  - [32mexpo-constants[0m (56.0.18)
+
+> Configure project :expo-modules-core
+Linking react-native-worklets native libs into expo-modules-core build tasks
+task ':react-native-worklets:mergeDebugNativeLibs'
+task ':react-native-worklets:mergeReleaseNativeLibs'
+
+> Configure project :expo
+  - [32mexpo-modules-core[0m (56.0.16)
+  - [33m[📦][0m [32mexpo-dom-webview[0m (56.0.5)
+  - [33m[📦][0m [32mexpo-ui[0m (56.0.17)
+  - [33m[📦][0m [32mexpo-asset[0m (56.0.17)
+  - [33m[📦][0m [32mexpo-file-system[0m (56.0.8)
+  - [33m[📦][0m [32mexpo-font[0m (56.0.6)
+  - [33m[📦][0m [32mexpo-keep-awake[0m (56.0.3)
+  - [33m[📦][0m [32mexpo-linking[0m (56.0.14)
+  - [33m[📦][0m [32mexpo-router[0m (56.2.10)
+  - [33m[📦][0m [32mexpo-splash-screen[0m (56.0.10)
+  - [33m[📦][0m [32mexpo-status-bar[0m (56.0.4)
+  - [33m[📦][0m [32mexpo-web-browser[0m (56.0.5)
+
+
+> Task :expo-log-box:preBuild UP-TO-DATE
+> Task :expo-modules-core:preBuild UP-TO-DATE
+> Task :expo:generatePackagesList
+> Task :expo:preBuild
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-async-storage_async-storage:preBuild UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript SKIPPED
+> Task :app:generateCodegenArtifactsFromSchema SKIPPED
+> Task :react-native-community_datetimepicker:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-community_datetimepicker:preBuild UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :react-native-masked-view_masked-view:preBuild UP-TO-DATE
+> Task :react-native-community_netinfo:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-community_netinfo:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-community_netinfo:preBuild UP-TO-DATE
+> Task :react-native-safe-area-context:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-safe-area-context:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-safe-area-context:preBuild UP-TO-DATE
+> Task :react-native-screens:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-screens:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-screens:preBuild UP-TO-DATE
+> Task :react-native-reanimated:assertMinimalReactNativeVersionTask
+> Task :react-native-reanimated:assertNewArchitectureEnabledTask SKIPPED
+> Task :react-native-worklets:assertMinimalReactNativeVersionTask
+> Task :react-native-worklets:assertNewArchitectureEnabledTask SKIPPED
+> Task :react-native-worklets:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-reanimated:assertWorkletsVersionTask
+> Task :react-native-reanimated:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-worklets:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-reanimated:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-worklets:prepareWorkletsHeadersForPrefabs UP-TO-DATE
+> Task :react-native-worklets:preBuild
+> Task :react-native-worklets:preReleaseBuild
+> Task :react-native-reanimated:prepareReanimatedHeadersForPrefabs UP-TO-DATE
+> Task :react-native-reanimated:preBuild
+> Task :react-native-reanimated:preReleaseBuild
+> Task :expo:preReleaseBuild
+
+> Task :expo-constants:createExpoConfig
+The NODE_ENV environment variable is required but was not specified. Ensure the project is bundled with Expo CLI or NODE_ENV is set. Using only .env.local and .env
+
+> Task :expo-constants:preBuild
+> Task :expo-constants:preReleaseBuild
+> Task :react-native-gesture-handler:generateCodegenSchemaFromJavaScript
+> Task :expo:mergeReleaseJniLibFolders
+> Task :expo-constants:mergeReleaseJniLibFolders
+> Task :expo-constants:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo:copyReleaseJniLibsProjectOnly
+> Task :expo-constants:copyReleaseJniLibsProjectOnly
+> Task :expo-log-box:preReleaseBuild UP-TO-DATE
+> Task :expo-modules-core:preReleaseBuild UP-TO-DATE
+> Task :expo-log-box:mergeReleaseJniLibFolders
+> Task :expo-modules-core:mergeReleaseJniLibFolders
+> Task :react-native-async-storage_async-storage:preReleaseBuild UP-TO-DATE
+> Task :expo-log-box:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-async-storage_async-storage:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-log-box:copyReleaseJniLibsProjectOnly
+> Task :react-native-community_datetimepicker:preReleaseBuild UP-TO-DATE
+> Task :react-native-async-storage_async-storage:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-community_netinfo:preReleaseBuild UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-community_netinfo:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-community_netinfo:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-community_datetimepicker:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-community_netinfo:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-masked-view_masked-view:preReleaseBuild UP-TO-DATE
+> Task :react-native-reanimated:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-safe-area-context:preReleaseBuild UP-TO-DATE
+> Task :react-native-masked-view_masked-view:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-masked-view_masked-view:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-safe-area-context:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-masked-view_masked-view:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-screens:preReleaseBuild UP-TO-DATE
+> Task :react-native-safe-area-context:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-safe-area-context:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-community_datetimepicker:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-community_datetimepicker:generateReleaseBuildConfig UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateReleaseResValues UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateReleaseResources UP-TO-DATE
+> Task :react-native-community_datetimepicker:packageReleaseResources UP-TO-DATE
+> Task :react-native-community_datetimepicker:parseReleaseLocalResources UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateReleaseRFile UP-TO-DATE
+> Task :react-native-gesture-handler:generateCodegenArtifactsFromSchema
+> Task :react-native-gesture-handler:preBuild
+> Task :app:preBuild
+> Task :app:preReleaseBuild
+> Task :app:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-gesture-handler:preReleaseBuild
+> Task :react-native-gesture-handler:mergeReleaseJniLibFolders
+> Task :react-native-safe-area-context:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-safe-area-context:generateReleaseBuildConfig UP-TO-DATE
+> Task :react-native-safe-area-context:generateReleaseResValues UP-TO-DATE
+> Task :react-native-safe-area-context:generateReleaseResources UP-TO-DATE
+> Task :react-native-safe-area-context:packageReleaseResources UP-TO-DATE
+> Task :react-native-safe-area-context:parseReleaseLocalResources UP-TO-DATE
+> Task :react-native-safe-area-context:generateReleaseRFile UP-TO-DATE
+> Task :react-native-community_datetimepicker:compileReleaseKotlin UP-TO-DATE
+> Task :react-native-community_datetimepicker:javaPreCompileRelease UP-TO-DATE
+> Task :react-native-community_datetimepicker:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :react-native-community_datetimepicker:bundleLibRuntimeToDirRelease UP-TO-DATE
+> Task :react-native-worklets:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :react-native-safe-area-context:compileReleaseKotlin UP-TO-DATE
+> Task :react-native-safe-area-context:javaPreCompileRelease UP-TO-DATE
+> Task :react-native-gesture-handler:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-safe-area-context:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :react-native-safe-area-context:bundleLibRuntimeToDirRelease UP-TO-DATE
+> Task :react-native-screens:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :react-native-gesture-handler:generateReleaseBuildConfig
+> Task :react-native-gesture-handler:generateReleaseResValues
+> Task :react-native-reanimated:generateReleaseBuildConfig UP-TO-DATE
+> Task :react-native-reanimated:generateReleaseResValues UP-TO-DATE
+> Task :react-native-gesture-handler:generateReleaseResources
+> Task :react-native-reanimated:generateReleaseResources UP-TO-DATE
+> Task :react-native-reanimated:packageReleaseResources UP-TO-DATE
+> Task :react-native-reanimated:parseReleaseLocalResources UP-TO-DATE
+> Task :react-native-reanimated:generateReleaseRFile UP-TO-DATE
+> Task :react-native-reanimated:javaPreCompileRelease UP-TO-DATE
+> Task :expo:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo:generateReleaseBuildConfig
+> Task :expo:generateReleaseResValues
+> Task :expo:generateReleaseResources
+> Task :react-native-screens:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :react-native-worklets:buildCMakeRelWithDebInfo[arm64-v8a][worklets]
+> Task :react-native-gesture-handler:packageReleaseResources
+> Task :expo:packageReleaseResources
+> Task :react-native-screens:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :react-native-worklets:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :react-native-screens:buildCMakeRelWithDebInfo[armeabi-v7a]
+> Task :react-native-worklets:buildCMakeRelWithDebInfo[armeabi-v7a][worklets]
+> Task :react-native-screens:configureCMakeRelWithDebInfo[x86]
+> Task :react-native-worklets:configureCMakeRelWithDebInfo[x86]
+> Task :react-native-screens:buildCMakeRelWithDebInfo[x86]
+> Task :react-native-screens:configureCMakeRelWithDebInfo[x86_64]
+> Task :expo:parseReleaseLocalResources
+> Task :react-native-gesture-handler:parseReleaseLocalResources
+> Task :react-native-worklets:buildCMakeRelWithDebInfo[x86][worklets]
+> Task :react-native-gesture-handler:javaPreCompileRelease
+> Task :react-native-screens:buildCMakeRelWithDebInfo[x86_64]
+> Task :react-native-worklets:configureCMakeRelWithDebInfo[x86_64]
+> Task :react-native-screens:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-screens:mergeReleaseNativeLibs UP-TO-DATE
+> Task :react-native-screens:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-screens:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-screens:generateReleaseBuildConfig UP-TO-DATE
+> Task :react-native-screens:generateReleaseResValues UP-TO-DATE
+> Task :react-native-screens:generateReleaseResources UP-TO-DATE
+> Task :expo:generateReleaseRFile
+> Task :react-native-gesture-handler:generateReleaseRFile
+> Task :expo-constants:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-modules-core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-screens:packageReleaseResources UP-TO-DATE
+> Task :expo-constants:generateReleaseBuildConfig
+> Task :expo-modules-core:generateReleaseBuildConfig
+> Task :react-native-worklets:buildCMakeRelWithDebInfo[x86_64][worklets]
+> Task :expo-modules-core:generateReleaseResValues
+> Task :expo-constants:generateReleaseResValues
+> Task :react-native-screens:parseReleaseLocalResources UP-TO-DATE
+> Task :expo-modules-core:generateReleaseResources
+> Task :expo-constants:generateReleaseResources
+> Task :react-native-screens:generateReleaseRFile UP-TO-DATE
+> Task :react-native-worklets:externalNativeBuildRelease
+> Task :react-native-worklets:generateJsonModelRelease
+> Task :react-native-worklets:prefabReleaseConfigurePackage
+> Task :expo-modules-core:packageReleaseResources
+> Task :expo-constants:packageReleaseResources
+> Task :react-native-worklets:prefabReleasePackage UP-TO-DATE
+> Task :react-native-worklets:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :react-native-worklets:mergeReleaseNativeLibs UP-TO-DATE
+> Task :react-native-reanimated:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :react-native-reanimated:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :react-native-reanimated:configureCMakeRelWithDebInfo[x86]
+> Task :react-native-reanimated:configureCMakeRelWithDebInfo[x86_64]
+> Task :react-native-reanimated:generateJsonModelRelease
+> Task :react-native-reanimated:prefabReleaseConfigurePackage UP-TO-DATE
+> Task :react-native-worklets:copyReleaseJniLibsProjectOnly
+> Task :react-native-reanimated:buildCMakeRelWithDebInfo[arm64-v8a][reanimated]
+> Task :react-native-screens:compileReleaseKotlin UP-TO-DATE
+> Task :app:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :react-native-gesture-handler:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :expo-modules-core:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :react-native-gesture-handler:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :app:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :react-native-gesture-handler:configureCMakeRelWithDebInfo[x86]
+> Task :app:configureCMakeRelWithDebInfo[x86]
+> Task :react-native-gesture-handler:configureCMakeRelWithDebInfo[x86_64]
+> Task :react-native-screens:javaPreCompileRelease UP-TO-DATE
+> Task :react-native-screens:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :react-native-reanimated:buildCMakeRelWithDebInfo[armeabi-v7a][reanimated]
+> Task :react-native-screens:bundleLibRuntimeToDirRelease
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+> Task :react-native-worklets:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-worklets:generateReleaseBuildConfig
+> Task :react-native-worklets:generateReleaseResValues
+> Task :react-native-worklets:generateReleaseResources
+> Task :react-native-worklets:packageReleaseResources
+> Task :react-native-worklets:parseReleaseLocalResources
+> Task :react-native-worklets:generateReleaseRFile
+> Task :react-native-worklets:compileReleaseKotlin NO-SOURCE
+> Task :react-native-worklets:javaPreCompileRelease
+
+> Task :react-native-worklets:compileReleaseJavaWithJavac
+Note: /var/lib/jenkins/workspace/apk-s3/node_modules/react-native-worklets/android/src/main/java/com/swmansion/worklets/WorkletsMessageQueueThreadBase.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /var/lib/jenkins/workspace/apk-s3/node_modules/react-native-worklets/android/src/main/java/com/swmansion/worklets/WorkletsPackage.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :react-native-worklets:bundleLibCompileToJarRelease
+> Task :expo-constants:parseReleaseLocalResources
+> Task :expo-constants:generateReleaseRFile
+> Task :expo-constants:javaPreCompileRelease
+> Task :expo-log-box:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-log-box:generateReleaseBuildConfig
+> Task :expo-log-box:generateReleaseResValues
+> Task :expo-log-box:generateReleaseResources
+> Task :expo-log-box:packageReleaseResources
+> Task :expo-log-box:parseReleaseLocalResources
+> Task :expo-log-box:generateReleaseRFile
+> Task :expo-log-box:javaPreCompileRelease
+> Task :expo:javaPreCompileRelease
+> Task :react-native-worklets:bundleLibRuntimeToDirRelease
+> Task :expo-modules-core:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :react-native-async-storage_async-storage:generateReleaseBuildConfig UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateReleaseResValues UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateReleaseResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:packageReleaseResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:parseReleaseLocalResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateReleaseRFile UP-TO-DATE
+> Task :react-native-async-storage_async-storage:javaPreCompileRelease UP-TO-DATE
+> Task :react-native-async-storage_async-storage:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :react-native-async-storage_async-storage:bundleLibRuntimeToDirRelease UP-TO-DATE
+> Task :react-native-community_netinfo:generateReleaseBuildConfig UP-TO-DATE
+> Task :react-native-community_netinfo:generateReleaseResValues UP-TO-DATE
+> Task :react-native-community_netinfo:generateReleaseResources UP-TO-DATE
+> Task :react-native-community_netinfo:packageReleaseResources UP-TO-DATE
+> Task :react-native-community_netinfo:parseReleaseLocalResources UP-TO-DATE
+> Task :react-native-community_netinfo:generateReleaseRFile UP-TO-DATE
+> Task :react-native-community_netinfo:javaPreCompileRelease UP-TO-DATE
+> Task :react-native-community_netinfo:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :react-native-community_netinfo:bundleLibRuntimeToDirRelease UP-TO-DATE
+> Task :react-native-masked-view_masked-view:generateReleaseBuildConfig UP-TO-DATE
+> Task :react-native-masked-view_masked-view:generateReleaseResValues UP-TO-DATE
+> Task :react-native-masked-view_masked-view:generateReleaseResources UP-TO-DATE
+> Task :react-native-masked-view_masked-view:packageReleaseResources UP-TO-DATE
+> Task :react-native-masked-view_masked-view:parseReleaseLocalResources UP-TO-DATE
+> Task :react-native-masked-view_masked-view:generateReleaseRFile UP-TO-DATE
+> Task :react-native-masked-view_masked-view:javaPreCompileRelease UP-TO-DATE
+> Task :react-native-masked-view_masked-view:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :react-native-masked-view_masked-view:bundleLibRuntimeToDirRelease UP-TO-DATE
+> Task :app:checkReleaseDuplicateClasses UP-TO-DATE
+> Task :app:buildKotlinToolingMetadata UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateReleaseBuildConfig UP-TO-DATE
+> Task :expo:writeReleaseAarMetadata
+> Task :expo-constants:writeReleaseAarMetadata
+> Task :expo-log-box:writeReleaseAarMetadata
+> Task :react-native-async-storage_async-storage:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-community_datetimepicker:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-community_netinfo:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-gesture-handler:writeReleaseAarMetadata
+> Task :react-native-masked-view_masked-view:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-safe-area-context:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-screens:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-worklets:writeReleaseAarMetadata
+> Task :app:createBundleReleaseJsAndAssets UP-TO-DATE
+> Task :app:generateReleaseResValues UP-TO-DATE
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources UP-TO-DATE
+> Task :expo:extractDeepLinksRelease
+> Task :expo:processReleaseManifest
+> Task :expo-constants:extractDeepLinksRelease
+> Task :expo-constants:processReleaseManifest
+> Task :expo-log-box:extractDeepLinksRelease
+> Task :expo-log-box:processReleaseManifest
+> Task :react-native-async-storage_async-storage:extractDeepLinksRelease UP-TO-DATE
+> Task :react-native-async-storage_async-storage:processReleaseManifest UP-TO-DATE
+> Task :react-native-community_datetimepicker:extractDeepLinksRelease UP-TO-DATE
+> Task :react-native-community_datetimepicker:processReleaseManifest UP-TO-DATE
+> Task :react-native-community_netinfo:extractDeepLinksRelease UP-TO-DATE
+> Task :react-native-community_netinfo:processReleaseManifest UP-TO-DATE
+> Task :react-native-gesture-handler:extractDeepLinksRelease
+> Task :react-native-gesture-handler:processReleaseManifest
+> Task :react-native-masked-view_masked-view:extractDeepLinksRelease UP-TO-DATE
+> Task :react-native-masked-view_masked-view:processReleaseManifest UP-TO-DATE
+> Task :react-native-safe-area-context:extractDeepLinksRelease UP-TO-DATE
+> Task :react-native-safe-area-context:processReleaseManifest UP-TO-DATE
+> Task :react-native-screens:extractDeepLinksRelease UP-TO-DATE
+> Task :react-native-screens:processReleaseManifest UP-TO-DATE
+> Task :react-native-worklets:extractDeepLinksRelease
+> Task :react-native-worklets:processReleaseManifest
+> Task :expo:compileReleaseLibraryResources
+> Task :expo-constants:compileReleaseLibraryResources
+> Task :expo-log-box:compileReleaseLibraryResources
+> Task :react-native-async-storage_async-storage:compileReleaseLibraryResources UP-TO-DATE
+> Task :react-native-community_datetimepicker:compileReleaseLibraryResources UP-TO-DATE
+> Task :react-native-community_netinfo:compileReleaseLibraryResources UP-TO-DATE
+> Task :react-native-gesture-handler:compileReleaseLibraryResources
+> Task :react-native-masked-view_masked-view:compileReleaseLibraryResources UP-TO-DATE
+> Task :react-native-safe-area-context:compileReleaseLibraryResources UP-TO-DATE
+> Task :react-native-screens:compileReleaseLibraryResources UP-TO-DATE
+> Task :react-native-worklets:compileReleaseLibraryResources
+> Task :react-native-async-storage_async-storage:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :react-native-community_datetimepicker:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :react-native-community_netinfo:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :react-native-masked-view_masked-view:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :react-native-safe-area-context:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :react-native-screens:bundleLibCompileToJarRelease
+> Task :expo:prepareReleaseArtProfile UP-TO-DATE
+> Task :expo-constants:prepareReleaseArtProfile UP-TO-DATE
+> Task :expo-log-box:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-async-storage_async-storage:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-community_datetimepicker:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-community_netinfo:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-gesture-handler:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-masked-view_masked-view:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-safe-area-context:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-screens:prepareReleaseArtProfile UP-TO-DATE
+> Task :react-native-worklets:prepareReleaseArtProfile
+> Task :react-native-community_datetimepicker:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :react-native-safe-area-context:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :react-native-screens:bundleLibRuntimeToJarRelease
+> Task :app:mergeReleaseResources
+> Task :app:packageReleaseResources UP-TO-DATE
+> Task :app:parseReleaseLocalResources UP-TO-DATE
+> Task :app:createReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksRelease UP-TO-DATE
+> Task :app:javaPreCompileRelease UP-TO-DATE
+> Task :app:desugarReleaseFileDependencies UP-TO-DATE
+> Task :app:mergeReleaseStartupProfile UP-TO-DATE
+
+> Task :expo-modules-core:buildCMakeRelWithDebInfo[arm64-v8a]
+C/C++: ninja: Entering directory `/var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/.cxx/RelWithDebInfo/5s5917u5/arm64-v8a'
+C/C++: /var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp:17:5: warning: 'RawPropsParser' is deprecated [-Wdeprecated-declarations]
+C/C++:    17 |     react::RawPropsParser(/*useRawPropsJsiValue=*/true)
+C/C++:       |     ^
+C/C++: /var/lib/jenkins/workspace/apk-s3/node_modules/react-native/ReactCommon/react/renderer/core/RawPropsParser.h:31:5: note: 'RawPropsParser' has been explicitly marked deprecated here
+C/C++:    31 |   [[deprecated]] explicit RawPropsParser(bool /* ignored */) : RawPropsParser() {}
+C/C++:       |     ^
+C/C++: 1 warning generated.
+
+> Task :app:mergeExtDexRelease UP-TO-DATE
+> Task :react-native-worklets:bundleLibRuntimeToJarRelease
+> Task :react-native-async-storage_async-storage:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :react-native-community_netinfo:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :react-native-masked-view_masked-view:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :app:mergeReleaseShaders
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :expo:mergeReleaseShaders
+> Task :expo:compileReleaseShaders NO-SOURCE
+> Task :expo:generateReleaseAssets UP-TO-DATE
+> Task :expo:mergeReleaseAssets
+> Task :expo-constants:mergeReleaseShaders
+> Task :expo-constants:compileReleaseShaders NO-SOURCE
+> Task :expo-constants:generateReleaseAssets UP-TO-DATE
+> Task :expo-constants:mergeReleaseAssets
+> Task :expo-log-box:mergeReleaseShaders
+> Task :expo-log-box:compileReleaseShaders NO-SOURCE
+> Task :expo-log-box:generateReleaseAssets UP-TO-DATE
+> Task :expo-log-box:mergeReleaseAssets
+> Task :react-native-async-storage_async-storage:mergeReleaseShaders UP-TO-DATE
+> Task :react-native-async-storage_async-storage:compileReleaseShaders NO-SOURCE
+> Task :react-native-async-storage_async-storage:generateReleaseAssets UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeReleaseAssets UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeReleaseShaders UP-TO-DATE
+> Task :react-native-community_datetimepicker:compileReleaseShaders NO-SOURCE
+> Task :react-native-community_datetimepicker:generateReleaseAssets UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeReleaseAssets UP-TO-DATE
+> Task :react-native-community_netinfo:mergeReleaseShaders UP-TO-DATE
+> Task :react-native-community_netinfo:compileReleaseShaders NO-SOURCE
+> Task :react-native-community_netinfo:generateReleaseAssets UP-TO-DATE
+> Task :react-native-community_netinfo:mergeReleaseAssets UP-TO-DATE
+> Task :react-native-gesture-handler:mergeReleaseShaders
+> Task :react-native-gesture-handler:compileReleaseShaders NO-SOURCE
+> Task :react-native-gesture-handler:generateReleaseAssets UP-TO-DATE
+> Task :react-native-gesture-handler:mergeReleaseAssets
+> Task :react-native-masked-view_masked-view:mergeReleaseShaders UP-TO-DATE
+> Task :react-native-masked-view_masked-view:compileReleaseShaders NO-SOURCE
+> Task :react-native-masked-view_masked-view:generateReleaseAssets UP-TO-DATE
+> Task :react-native-masked-view_masked-view:mergeReleaseAssets UP-TO-DATE
+> Task :react-native-safe-area-context:mergeReleaseShaders UP-TO-DATE
+> Task :react-native-safe-area-context:compileReleaseShaders NO-SOURCE
+> Task :react-native-safe-area-context:generateReleaseAssets UP-TO-DATE
+> Task :react-native-safe-area-context:mergeReleaseAssets UP-TO-DATE
+> Task :react-native-screens:mergeReleaseShaders UP-TO-DATE
+> Task :react-native-screens:compileReleaseShaders NO-SOURCE
+> Task :react-native-screens:generateReleaseAssets UP-TO-DATE
+> Task :react-native-screens:mergeReleaseAssets UP-TO-DATE
+> Task :react-native-worklets:mergeReleaseShaders
+> Task :react-native-worklets:compileReleaseShaders NO-SOURCE
+> Task :react-native-worklets:generateReleaseAssets UP-TO-DATE
+> Task :react-native-worklets:mergeReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :expo:extractProguardFiles
+> Task :app:extractProguardFiles
+> Task :expo-constants:extractProguardFiles
+> Task :expo-constants:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-worklets:processReleaseJavaRes NO-SOURCE
+> Task :expo-log-box:extractProguardFiles
+> Task :expo-log-box:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-worklets:createFullJarRelease
+> Task :expo:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-worklets:extractProguardFiles
+> Task :react-native-async-storage_async-storage:processReleaseJavaRes NO-SOURCE
+> Task :react-native-async-storage_async-storage:createFullJarRelease UP-TO-DATE
+> Task :react-native-async-storage_async-storage:extractProguardFiles UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateReleaseLintModel UP-TO-DATE
+> Task :react-native-async-storage_async-storage:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-community_datetimepicker:processReleaseJavaRes UP-TO-DATE
+> Task :react-native-community_datetimepicker:createFullJarRelease UP-TO-DATE
+> Task :react-native-community_datetimepicker:extractProguardFiles UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateReleaseLintModel UP-TO-DATE
+> Task :react-native-community_datetimepicker:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-community_netinfo:processReleaseJavaRes NO-SOURCE
+> Task :react-native-community_netinfo:createFullJarRelease UP-TO-DATE
+> Task :react-native-community_netinfo:extractProguardFiles UP-TO-DATE
+> Task :react-native-community_netinfo:generateReleaseLintModel UP-TO-DATE
+> Task :react-native-community_netinfo:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-gesture-handler:extractProguardFiles
+> Task :react-native-gesture-handler:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-masked-view_masked-view:processReleaseJavaRes NO-SOURCE
+> Task :react-native-masked-view_masked-view:createFullJarRelease UP-TO-DATE
+> Task :react-native-masked-view_masked-view:extractProguardFiles UP-TO-DATE
+> Task :react-native-masked-view_masked-view:generateReleaseLintModel UP-TO-DATE
+> Task :react-native-masked-view_masked-view:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-safe-area-context:processReleaseJavaRes UP-TO-DATE
+> Task :react-native-safe-area-context:createFullJarRelease UP-TO-DATE
+> Task :react-native-safe-area-context:extractProguardFiles UP-TO-DATE
+> Task :react-native-safe-area-context:generateReleaseLintModel UP-TO-DATE
+> Task :react-native-safe-area-context:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-screens:processReleaseJavaRes
+> Task :react-native-screens:createFullJarRelease
+> Task :react-native-screens:extractProguardFiles UP-TO-DATE
+> Task :react-native-screens:generateReleaseLintModel
+> Task :react-native-screens:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-community_datetimepicker:stripReleaseDebugSymbols NO-SOURCE
+> Task :react-native-community_datetimepicker:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-community_datetimepicker:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :react-native-community_datetimepicker:extractReleaseAnnotations UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeReleaseJavaResource UP-TO-DATE
+> Task :react-native-community_datetimepicker:syncReleaseLibJars UP-TO-DATE
+> Task :react-native-community_datetimepicker:bundleReleaseLocalLintAar UP-TO-DATE
+> Task :react-native-safe-area-context:stripReleaseDebugSymbols NO-SOURCE
+> Task :react-native-safe-area-context:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-safe-area-context:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :react-native-safe-area-context:extractReleaseAnnotations UP-TO-DATE
+> Task :react-native-safe-area-context:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-safe-area-context:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :react-native-safe-area-context:mergeReleaseJavaResource UP-TO-DATE
+> Task :react-native-safe-area-context:syncReleaseLibJars UP-TO-DATE
+> Task :react-native-safe-area-context:bundleReleaseLocalLintAar UP-TO-DATE
+> Task :react-native-screens:stripReleaseDebugSymbols UP-TO-DATE
+> Task :react-native-screens:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-screens:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :react-native-screens:extractReleaseAnnotations
+> Task :react-native-worklets:generateReleaseLintModel
+> Task :react-native-screens:mergeReleaseGeneratedProguardFiles
+> Task :react-native-screens:mergeReleaseConsumerProguardFiles
+> Task :react-native-worklets:prepareLintJarForPublish
+> Task :react-native-gesture-handler:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :expo:stripReleaseDebugSymbols NO-SOURCE
+> Task :expo:copyReleaseJniLibsProjectAndLocalJars
+> Task :expo:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :react-native-screens:mergeReleaseJavaResource
+> Task :react-native-worklets:stripReleaseDebugSymbols
+> Task :react-native-worklets:copyReleaseJniLibsProjectAndLocalJars
+> Task :react-native-worklets:extractDeepLinksForAarRelease
+> Task :react-native-worklets:extractReleaseAnnotations
+> Task :react-native-worklets:mergeReleaseGeneratedProguardFiles
+> Task :react-native-worklets:mergeReleaseConsumerProguardFiles
+> Task :react-native-worklets:mergeReleaseJavaResource
+> Task :react-native-worklets:syncReleaseLibJars
+> Task :react-native-screens:syncReleaseLibJars
+> Task :react-native-screens:bundleReleaseLocalLintAar
+> Task :react-native-async-storage_async-storage:stripReleaseDebugSymbols NO-SOURCE
+> Task :react-native-async-storage_async-storage:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-async-storage_async-storage:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :react-native-async-storage_async-storage:extractReleaseAnnotations UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeReleaseJavaResource UP-TO-DATE
+> Task :react-native-async-storage_async-storage:syncReleaseLibJars UP-TO-DATE
+> Task :react-native-async-storage_async-storage:bundleReleaseLocalLintAar UP-TO-DATE
+> Task :react-native-community_netinfo:stripReleaseDebugSymbols NO-SOURCE
+> Task :react-native-community_netinfo:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-community_netinfo:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :react-native-community_netinfo:extractReleaseAnnotations UP-TO-DATE
+> Task :react-native-community_netinfo:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-community_netinfo:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :react-native-community_netinfo:mergeReleaseJavaResource UP-TO-DATE
+> Task :react-native-community_netinfo:syncReleaseLibJars UP-TO-DATE
+> Task :react-native-community_netinfo:bundleReleaseLocalLintAar UP-TO-DATE
+> Task :react-native-masked-view_masked-view:stripReleaseDebugSymbols NO-SOURCE
+> Task :react-native-masked-view_masked-view:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-masked-view_masked-view:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :react-native-masked-view_masked-view:extractReleaseAnnotations UP-TO-DATE
+> Task :react-native-masked-view_masked-view:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-masked-view_masked-view:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :react-native-masked-view_masked-view:mergeReleaseJavaResource UP-TO-DATE
+> Task :react-native-masked-view_masked-view:syncReleaseLibJars UP-TO-DATE
+> Task :react-native-masked-view_masked-view:bundleReleaseLocalLintAar UP-TO-DATE
+> Task :expo-log-box:stripReleaseDebugSymbols NO-SOURCE
+> Task :expo-log-box:copyReleaseJniLibsProjectAndLocalJars
+> Task :expo-log-box:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :expo-constants:stripReleaseDebugSymbols NO-SOURCE
+> Task :expo-constants:copyReleaseJniLibsProjectAndLocalJars
+> Task :expo-constants:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :expo-constants:writeReleaseLintModelMetadata
+> Task :expo-log-box:writeReleaseLintModelMetadata
+> Task :expo:writeReleaseLintModelMetadata
+> Task :react-native-async-storage_async-storage:lintVitalAnalyzeRelease UP-TO-DATE
+> Task :react-native-async-storage_async-storage:writeReleaseLintModelMetadata UP-TO-DATE
+> Task :react-native-community_datetimepicker:lintVitalAnalyzeRelease UP-TO-DATE
+> Task :react-native-community_datetimepicker:writeReleaseLintModelMetadata
+> Task :react-native-worklets:bundleReleaseLocalLintAar
+> Task :react-native-worklets:writeReleaseLintModelMetadata
+> Task :react-native-community_netinfo:writeReleaseLintModelMetadata
+> Task :react-native-gesture-handler:writeReleaseLintModelMetadata
+> Task :expo-modules-core:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :react-native-community_netinfo:lintVitalAnalyzeRelease
+> Task :react-native-masked-view_masked-view:lintVitalAnalyzeRelease
+> Task :expo-modules-core:buildCMakeRelWithDebInfo[armeabi-v7a]
+> Task :react-native-masked-view_masked-view:writeReleaseLintModelMetadata
+> Task :react-native-safe-area-context:lintVitalAnalyzeRelease
+> Task :react-native-screens:lintVitalAnalyzeRelease
+
+> Task :expo-modules-core:buildCMakeRelWithDebInfo[armeabi-v7a]
+C/C++: ninja: Entering directory `/var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/.cxx/RelWithDebInfo/5s5917u5/armeabi-v7a'
+C/C++: /var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp:17:5: warning: 'RawPropsParser' is deprecated [-Wdeprecated-declarations]
+C/C++:    17 |     react::RawPropsParser(/*useRawPropsJsiValue=*/true)
+C/C++:       |     ^
+C/C++: /var/lib/jenkins/workspace/apk-s3/node_modules/react-native/ReactCommon/react/renderer/core/RawPropsParser.h:31:5: note: 'RawPropsParser' has been explicitly marked deprecated here
+C/C++:    31 |   [[deprecated]] explicit RawPropsParser(bool /* ignored */) : RawPropsParser() {}
+C/C++:       |     ^
+C/C++: 1 warning generated.
+
+> Task :expo-modules-core:configureCMakeRelWithDebInfo[x86]
+> Task :react-native-safe-area-context:writeReleaseLintModelMetadata
+> Task :react-native-screens:writeReleaseLintModelMetadata
+> Task :expo-modules-core:buildCMakeRelWithDebInfo[x86]
+> Task :react-native-worklets:lintVitalAnalyzeRelease
+> Task :react-native-async-storage_async-storage:generateReleaseLintVitalModel
+> Task :react-native-community_datetimepicker:generateReleaseLintVitalModel
+> Task :react-native-community_netinfo:generateReleaseLintVitalModel
+> Task :react-native-masked-view_masked-view:generateReleaseLintVitalModel
+> Task :react-native-safe-area-context:generateReleaseLintVitalModel
+> Task :react-native-screens:generateReleaseLintVitalModel
+> Task :react-native-worklets:generateReleaseLintVitalModel
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:validateSigningRelease
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :expo:mapReleaseSourceSetPaths
+> Task :expo:mergeReleaseResources
+> Task :expo-constants:mapReleaseSourceSetPaths
+> Task :expo-constants:mergeReleaseResources
+> Task :expo-constants:verifyReleaseResources
+> Task :expo-log-box:mapReleaseSourceSetPaths
+> Task :expo-log-box:mergeReleaseResources
+
+> Task :expo-modules-core:buildCMakeRelWithDebInfo[x86]
+C/C++: ninja: Entering directory `/var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/.cxx/RelWithDebInfo/5s5917u5/x86'
+C/C++: /var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp:17:5: warning: 'RawPropsParser' is deprecated [-Wdeprecated-declarations]
+C/C++:    17 |     react::RawPropsParser(/*useRawPropsJsiValue=*/true)
+C/C++:       |     ^
+C/C++: /var/lib/jenkins/workspace/apk-s3/node_modules/react-native/ReactCommon/react/renderer/core/RawPropsParser.h:31:5: note: 'RawPropsParser' has been explicitly marked deprecated here
+C/C++:    31 |   [[deprecated]] explicit RawPropsParser(bool /* ignored */) : RawPropsParser() {}
+C/C++:       |     ^
+C/C++: 1 warning generated.
+
+> Task :expo-log-box:verifyReleaseResources
+> Task :react-native-async-storage_async-storage:bundleReleaseAar
+> Task :react-native-async-storage_async-storage:mapReleaseSourceSetPaths
+> Task :expo-modules-core:configureCMakeRelWithDebInfo[x86_64]
+> Task :react-native-async-storage_async-storage:mergeReleaseResources
+> Task :react-native-async-storage_async-storage:verifyReleaseResources
+> Task :react-native-async-storage_async-storage:assembleRelease
+> Task :react-native-community_datetimepicker:bundleReleaseAar
+> Task :react-native-community_datetimepicker:mapReleaseSourceSetPaths
+> Task :react-native-community_datetimepicker:mergeReleaseResources
+> Task :expo-modules-core:buildCMakeRelWithDebInfo[x86_64]
+> Task :react-native-community_datetimepicker:verifyReleaseResources
+> Task :react-native-community_datetimepicker:assembleRelease
+> Task :react-native-community_netinfo:bundleReleaseAar
+> Task :react-native-community_netinfo:mapReleaseSourceSetPaths
+> Task :react-native-community_netinfo:mergeReleaseResources
+> Task :react-native-community_netinfo:verifyReleaseResources
+> Task :react-native-community_netinfo:assembleRelease
+> Task :react-native-gesture-handler:mapReleaseSourceSetPaths
+> Task :react-native-gesture-handler:mergeReleaseResources
+> Task :react-native-masked-view_masked-view:bundleReleaseAar
+> Task :react-native-masked-view_masked-view:mapReleaseSourceSetPaths
+> Task :react-native-safe-area-context:bundleReleaseAar
+> Task :react-native-safe-area-context:mapReleaseSourceSetPaths
+> Task :react-native-masked-view_masked-view:mergeReleaseResources
+> Task :react-native-safe-area-context:mergeReleaseResources
+> Task :react-native-masked-view_masked-view:verifyReleaseResources
+> Task :react-native-masked-view_masked-view:assembleRelease
+> Task :react-native-screens:bundleReleaseAar
+> Task :react-native-screens:mapReleaseSourceSetPaths
+> Task :react-native-safe-area-context:verifyReleaseResources
+> Task :react-native-safe-area-context:assembleRelease
+> Task :react-native-screens:mergeReleaseResources
+
+> Task :expo-modules-core:buildCMakeRelWithDebInfo[x86_64]
+C/C++: ninja: Entering directory `/var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/.cxx/RelWithDebInfo/5s5917u5/x86_64'
+C/C++: /var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp:17:5: warning: 'RawPropsParser' is deprecated [-Wdeprecated-declarations]
+C/C++:    17 |     react::RawPropsParser(/*useRawPropsJsiValue=*/true)
+C/C++:       |     ^
+C/C++: /var/lib/jenkins/workspace/apk-s3/node_modules/react-native/ReactCommon/react/renderer/core/RawPropsParser.h:31:5: note: 'RawPropsParser' has been explicitly marked deprecated here
+C/C++:    31 |   [[deprecated]] explicit RawPropsParser(bool /* ignored */) : RawPropsParser() {}
+C/C++:       |     ^
+C/C++: 1 warning generated.
+
+> Task :react-native-screens:verifyReleaseResources
+> Task :react-native-screens:assembleRelease
+> Task :react-native-worklets:bundleReleaseAar
+> Task :react-native-worklets:mapReleaseSourceSetPaths
+> Task :react-native-worklets:mergeReleaseResources
+> Task :expo-modules-core:parseReleaseLocalResources
+> Task :react-native-worklets:verifyReleaseResources
+> Task :expo-modules-core:generateReleaseRFile
+> Task :expo-modules-core:javaPreCompileRelease
+> Task :react-native-worklets:assembleRelease
+> Task :expo-modules-core:mergeReleaseNativeLibs
+> Task :expo-modules-core:writeReleaseAarMetadata
+> Task :expo-modules-core:extractDeepLinksRelease
+
+> Task :expo-modules-core:processReleaseManifest
+/var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/AndroidManifest.xml:8:9-11:45 Warning:
+	meta-data#com.facebook.soloader.enabled@android:value was tagged at AndroidManifest.xml:8 to replace other declarations but no other declaration present
+
+> Task :expo-modules-core:compileReleaseLibraryResources
+> Task :expo-modules-core:prepareReleaseArtProfile UP-TO-DATE
+> Task :expo-modules-core:mergeReleaseShaders
+> Task :expo-modules-core:compileReleaseShaders NO-SOURCE
+> Task :expo-modules-core:generateReleaseAssets UP-TO-DATE
+> Task :expo-modules-core:mergeReleaseAssets
+> Task :expo-modules-core:extractProguardFiles
+> Task :expo-modules-core:prepareLintJarForPublish UP-TO-DATE
+> Task :expo-modules-core:stripReleaseDebugSymbols
+> Task :expo-modules-core:copyReleaseJniLibsProjectAndLocalJars
+> Task :expo-modules-core:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :expo-modules-core:writeReleaseLintModelMetadata
+> Task :expo-modules-core:copyReleaseJniLibsProjectOnly
+> Task :expo-modules-core:mapReleaseSourceSetPaths
+> Task :expo-modules-core:mergeReleaseResources
+> Task :expo-modules-core:verifyReleaseResources
+> Task :expo:verifyReleaseResources
+> Task :expo-modules-core:compileReleaseKotlin
+> Task :react-native-reanimated:buildCMakeRelWithDebInfo[x86][reanimated]
+
+> Task :expo-modules-core:compileReleaseKotlin
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/apploader/AppLoaderProvider.kt:34:52 Unchecked cast of 'Class<*>!' to 'Class<out HeadlessAppLoader>'.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/AppContext.kt:14:8 'class UIManagerModule : ReactContextBaseJavaModule, LifecycleEventListener, UIManager' is deprecated. Deprecated in Java.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/AppContext.kt:22:8 'typealias ErrorManagerModule = JSLoggerModule' is deprecated. Use JSLoggerModule instead.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/AppContext.kt:61:13 'val hostingRuntimeContext: MainRuntime' is deprecated. Use AppContext.runtimeContext instead.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/AppContext.kt:271:21 'typealias ErrorManagerModule = JSLoggerModule' is deprecated. Use JSLoggerModule instead.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/AppContext.kt:380:21 'val DEFAULT: Int' is deprecated. UIManagerType.DEFAULT will be deleted in the next release of React Native. Use [LEGACY] instead.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/AppContext.kt:381:10 'class UIManagerModule : ReactContextBaseJavaModule, LifecycleEventListener, UIManager' is deprecated. Deprecated in Java.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/defaultmodules/NativeModulesProxyModule.kt:16:5 'fun Constants(legacyConstantsProvider: () -> Map<String, Any?>): Unit' is deprecated. Use `Constant` or `Property` instead.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/events/KModuleEventEmitterWrapper.kt:99:21 'fun getEventDispatcherForReactTag(context: ReactContext, reactTag: Int): EventDispatcher?' is deprecated. reactTag is no longer needed.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/events/KModuleEventEmitterWrapper.kt:108:21 'fun getEventDispatcherForReactTag(context: ReactContext, reactTag: Int): EventDispatcher?' is deprecated. reactTag is no longer needed.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/views/ViewDefinitionBuilder.kt:470:16 'val errorManager: JSLoggerModule?' is deprecated. Use AppContext.jsLogger instead.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/views/ViewDefinitionBuilder.kt:470:30 'fun reportExceptionToLogBox(codedException: CodedException): Unit' is deprecated. Use appContext.jsLogger.error(...) instead.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/views/ViewManagerDefinition.kt:41:16 'val errorManager: JSLoggerModule?' is deprecated. Use AppContext.jsLogger instead.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-modules-core/android/src/main/java/expo/modules/kotlin/views/ViewManagerDefinition.kt:41:30 'fun reportExceptionToLogBox(codedException: CodedException): Unit' is deprecated. Use appContext.jsLogger.error(...) instead.
+
+> Task :expo-modules-core:compileReleaseJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :expo-modules-core:bundleLibCompileToJarRelease
+> Task :expo-modules-core:bundleLibRuntimeToJarRelease
+> Task :expo-modules-core:bundleLibRuntimeToDirRelease
+
+> Task :expo-constants:compileReleaseKotlin
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo-constants/android/src/main/java/expo/modules/constants/ConstantsModule.kt:13:5 'fun Constants(legacyConstantsProvider: () -> Map<String, Any?>): Unit' is deprecated. Use `Constant` or `Property` instead.
+
+> Task :expo-constants:compileReleaseJavaWithJavac
+> Task :expo-constants:bundleLibCompileToJarRelease
+> Task :expo-constants:bundleLibRuntimeToDirRelease
+> Task :expo-log-box:compileReleaseKotlin
+> Task :expo-log-box:compileReleaseJavaWithJavac
+> Task :expo-log-box:bundleLibCompileToJarRelease
+
+> Task :expo:compileReleaseKotlin
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo/android/src/main/java/expo/modules/ExpoModulesPackage.kt:34:16 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo/android/src/main/java/expo/modules/ReactActivityDelegateWrapper.kt:22:8 'class ReactInstanceManager : Any' is deprecated. Deprecated in Java.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo/android/src/main/java/expo/modules/ReactActivityDelegateWrapper.kt:102:16 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo/android/src/main/java/expo/modules/ReactActivityDelegateWrapper.kt:102:43 'class ReactInstanceManager : Any' is deprecated. Deprecated in Java.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo/android/src/main/java/expo/modules/ReactActivityDelegateWrapper.kt:103:21 'val reactInstanceManager: ReactInstanceManager' is deprecated. Deprecated in Java.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo/android/src/main/java/expo/modules/fetch/ExpoFetchModule.kt:32:39 'constructor(reactContext: ReactContext): ForwardingCookieHandler' is deprecated. Use the default constructor.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo/android/src/main/java/expo/modules/fetch/NativeResponse.kt:42:16 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///var/lib/jenkins/workspace/apk-s3/node_modules/expo/android/src/main/java/expo/modules/fetch/NativeResponse.kt:44:11 'fun deallocate(): Unit' is deprecated. Use sharedObjectDidRelease() instead.
+
+> Task :expo:compileReleaseJavaWithJavac
+> Task :expo:bundleLibRuntimeToDirRelease
+> Task :expo-log-box:bundleLibRuntimeToDirRelease
+> Task :expo:bundleLibCompileToJarRelease
+> Task :expo:bundleLibRuntimeToJarRelease
+> Task :expo-log-box:bundleLibRuntimeToJarRelease
+> Task :expo-constants:bundleLibRuntimeToJarRelease
+> Task :expo:processReleaseJavaRes
+> Task :expo:createFullJarRelease
+> Task :expo-constants:processReleaseJavaRes
+> Task :expo-constants:createFullJarRelease
+> Task :expo-modules-core:processReleaseJavaRes
+> Task :expo-modules-core:createFullJarRelease
+> Task :expo-log-box:processReleaseJavaRes
+> Task :expo-log-box:createFullJarRelease
+> Task :expo:extractReleaseAnnotations
+> Task :expo:mergeReleaseGeneratedProguardFiles
+> Task :expo:mergeReleaseConsumerProguardFiles
+> Task :expo:mergeReleaseJavaResource
+> Task :expo:syncReleaseLibJars
+> Task :expo:bundleReleaseLocalLintAar
+> Task :expo-log-box:extractReleaseAnnotations
+> Task :expo-log-box:mergeReleaseGeneratedProguardFiles
+> Task :expo-log-box:mergeReleaseConsumerProguardFiles
+> Task :expo-log-box:mergeReleaseJavaResource
+> Task :expo-log-box:syncReleaseLibJars
+> Task :expo-log-box:bundleReleaseLocalLintAar
+> Task :expo-constants:extractReleaseAnnotations
+> Task :expo-constants:mergeReleaseGeneratedProguardFiles
+> Task :expo-constants:mergeReleaseConsumerProguardFiles
+> Task :expo-constants:mergeReleaseJavaResource
+> Task :expo-constants:syncReleaseLibJars
+> Task :expo-constants:bundleReleaseLocalLintAar
+> Task :expo:bundleReleaseAar
+> Task :expo:assembleRelease
+> Task :expo-constants:bundleReleaseAar
+> Task :expo-constants:assembleRelease
+> Task :expo-log-box:bundleReleaseAar
+> Task :expo-log-box:assembleRelease
+> Task :expo-modules-core:generateReleaseLintModel
+> Task :expo-modules-core:extractReleaseAnnotations
+> Task :expo-modules-core:mergeReleaseGeneratedProguardFiles
+> Task :expo-modules-core:mergeReleaseConsumerProguardFiles
+> Task :expo-constants:generateReleaseLintModel
+> Task :expo-modules-core:mergeReleaseJavaResource
+> Task :expo-constants:generateReleaseLintVitalModel
+> Task :expo-log-box:generateReleaseLintModel
+> Task :expo-log-box:generateReleaseLintVitalModel
+> Task :expo-modules-core:syncReleaseLibJars
+> Task :expo-modules-core:bundleReleaseLocalLintAar
+> Task :expo:generateReleaseLintModel
+> Task :expo-constants:lintVitalAnalyzeRelease
+> Task :expo-log-box:lintVitalAnalyzeRelease
+> Task :expo:generateReleaseLintVitalModel
+> Task :expo-modules-core:generateReleaseLintVitalModel
+> Task :expo-modules-core:bundleReleaseAar
+> Task :expo-modules-core:assembleRelease
+> Task :expo:lintVitalAnalyzeRelease
+> Task :expo-modules-core:lintVitalAnalyzeRelease
+> Task :react-native-reanimated:buildCMakeRelWithDebInfo[x86_64][reanimated]
+Resuming build at Fri Jun 12 14:18:34 IST 2026 after Jenkins restart
+Ready to run at Fri Jun 12 14:18:36 IST 2026
+wrapper script does not seem to be touching the log file in /var/lib/jenkins/workspace/apk-s3@tmp/durable-9d058607
+(JENKINS-48300: if on an extremely laggy filesystem, consider -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400)
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (5. Upload APK to S3)
+Stage "5. Upload APK to S3" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code -1
+Finished: FAILURE
